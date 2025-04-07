@@ -1,0 +1,81 @@
+//Colors - Retrowave Theme
+$retro-dark: #1a0933; // Rich purple background instead of deep blue
+$retro-darker: #10051f; // Even deeper background for contrasts
+$retro-pink: #ff00ff; // Hot pink for neon highlights
+$retro-cyan: #00fefe; // Bright cyan for neon highlights
+$retro-purple: #9900ff; // Purple accents
+$retro-blue: #0072ff; // Blue accents
+$retro-yellow: #fee139; // Yellow/gold for contrast elements
+$retro-red: #ff2b59; // Red for errors and alerts
+$retro-text: #ffffff; // White text on dark backgrounds
+
+// Original colors for reference (now deprecated)
+$background-color-main: hsla(267, 15%, 12%, 0.247);
+$background-color-tertiary: hsla(0, 0%, 96%, 0.1);
+$background-color-secondary: #171717;
+$font-color-main: $retro-text; // Now uses retro-text
+$theme-color: $retro-cyan; // Now uses retro-cyan
+$theme-color2: $retro-purple; // Now uses retro-purple
+$theme-color3: $retro-blue; // Now uses retro-blue
+$hover-color: $retro-yellow; // Now uses retro-yellow
+$red: $retro-red; // Now uses retro-red
+$yellow: $retro-yellow; // Now uses retro-yellow
+
+// Sizing and layout
+$max-width: 1200px; // Increased for modern displays
+$min-width: 650px;
+
+// Glass Effects
+$glass-bg: rgba(26, 9, 51, 0.3);
+$glass-border: rgba(255, 0, 255, 0.2);
+$glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+// Animation timing
+$transition-speed: 0.3s;
+$transition-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+
+// Typography
+$font-family-retro: "Press Start 2P", cursive; // Pixel font
+$font-family-display: "Audiowide", cursive; // Display headings
+$font-family-terminal: "VT323", monospace; // Body text with terminal feel
+
+// Neon glow effects
+$neon-pink-glow: 0 0 5px rgba(255, 0, 255, 0.5), 0 0 10px rgba(255, 0, 255, 0.3),
+  0 0 15px rgba(255, 0, 255, 0.1);
+$neon-cyan-glow: 0 0 5px rgba(0, 255, 255, 0.5), 0 0 10px rgba(0, 255, 255, 0.3),
+  0 0 15px rgba(0, 255, 255, 0.1);
+$neon-yellow-glow: 0 0 5px rgba(254, 225, 57, 0.5),
+  0 0 10px rgba(254, 225, 57, 0.3), 0 0 15px rgba(254, 225, 57, 0.1);
+
+// Star fields for background effects
+$stars-small: random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff;
+
+$stars-large: random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff,
+  random(100) * 1vw random(100) * 1vh #fff;

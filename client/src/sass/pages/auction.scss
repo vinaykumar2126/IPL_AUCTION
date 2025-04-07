@@ -1,0 +1,430 @@
+.auction {
+  position: relative;
+  min-height: 100vh;
+  background-color: $retro-dark;
+  color: $retro-text;
+  overflow: hidden;
+
+  // Retro grid background
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 70, 0.9) 0%,
+      rgba(28, 0, 51, 0.9) 100%
+    );
+    background-size: cover;
+    z-index: -2;
+  }
+
+  // Perspective grid effect
+  &::after {
+    content: "";
+    position: absolute;
+    left: -50%;
+    top: 0;
+    width: 200%;
+    height: 100%;
+    background-image: linear-gradient(
+        0deg,
+        transparent 24%,
+        rgba(32, 76, 251, 0.3) 25%,
+        rgba(32, 76, 251, 0.3) 26%,
+        transparent 27%,
+        transparent 74%,
+        rgba(32, 76, 251, 0.3) 75%,
+        rgba(32, 76, 251, 0.3) 76%,
+        transparent 77%,
+        transparent
+      ),
+      linear-gradient(
+        90deg,
+        transparent 24%,
+        rgba(32, 76, 251, 0.3) 25%,
+        rgba(32, 76, 251, 0.3) 26%,
+        transparent 27%,
+        transparent 74%,
+        rgba(32, 76, 251, 0.3) 75%,
+        rgba(32, 76, 251, 0.3) 76%,
+        transparent 77%,
+        transparent
+      );
+    background-size: 50px 50px;
+    background-position: center;
+    transform: perspective(500px) rotateX(60deg);
+    z-index: -1;
+    opacity: 0.5;
+    animation: gridMove 20s linear infinite;
+  }
+
+  // VHS scan lines
+  &-vhs-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(255, 0, 255, 0.1) 50%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    background-size: 100% 8px;
+    z-index: 10;
+    pointer-events: none;
+    animation: scanline 8s linear infinite;
+    opacity: 0.3;
+  }
+
+  // Star field effect
+  &-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    z-index: -1;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      background: transparent;
+      box-shadow: $stars-small;
+      animation: twinkle 5s ease-in-out infinite alternate;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: transparent;
+      box-shadow: $stars-large;
+      animation: twinkle 7s ease-in-out infinite alternate;
+    }
+  }
+
+  // Retro sun
+  &-sun {
+    position: absolute;
+    bottom: -150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(
+      circle,
+      rgba(255, 0, 128, 0.8) 0%,
+      rgba(255, 0, 128, 0) 70%
+    );
+    z-index: -1;
+    opacity: 0.5;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(
+        circle,
+        rgba(255, 0, 255, 0.8) 0%,
+        rgba(255, 0, 255, 0) 70%
+      );
+      filter: blur(20px);
+      animation: pulse 4s ease-in-out infinite;
+    }
+  }
+
+  &-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    z-index: 1;
+  }
+
+  &-header {
+    text-align: center;
+    margin-bottom: 3rem;
+
+    h1 {
+      @include neon-text($retro-cyan, $retro-pink);
+      font-family: "Audiowide", cursive;
+      font-size: 3.5rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        height: 4px;
+        width: 30px;
+        background: $retro-pink;
+        top: 50%;
+      }
+
+      &::before {
+        left: -40px;
+      }
+
+      &::after {
+        right: -40px;
+      }
+    }
+
+    p {
+      font-family: "VT323", monospace;
+      font-size: 1.2rem;
+      color: $retro-text;
+      max-width: 700px;
+      margin: 0 auto;
+      text-shadow: 0 0 5px rgba(cyan, 0.5);
+    }
+  }
+
+  &-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  &-sidebar {
+    @include glassmorphism(rgba(0, 0, 0, 0.6), rgba(255, 0, 255, 0.2));
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+
+    h2 {
+      @include chrome-text;
+      font-family: "Press Start 2P", cursive;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .team-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      &-item {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba($retro-pink, 0.3);
+
+        span {
+          &:first-child {
+            color: $retro-yellow;
+          }
+
+          &:last-child {
+            @include neon-text($retro-text, $retro-cyan, 0.5);
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+
+  &-form {
+    @include glassmorphism(rgba(0, 0, 0, 0.7), rgba(0, 255, 255, 0.2));
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+
+    h3 {
+      font-family: "Audiowide", cursive;
+      color: $retro-cyan;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 3px;
+        background: $retro-pink;
+        box-shadow: 0 0 10px $retro-pink;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: $retro-yellow;
+        font-family: "VT323", monospace;
+        font-size: 1.1rem;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: rgba(0, 0, 0, 0.6);
+        border: 1px solid $retro-cyan;
+        border-radius: 4px;
+        color: $retro-text;
+        font-family: "VT323", monospace;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+
+        &:focus {
+          outline: none;
+          border-color: $retro-pink;
+          box-shadow: 0 0 10px rgba($retro-pink, 0.5);
+        }
+      }
+
+      ::placeholder {
+        color: rgba($retro-text, 0.5);
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+
+      button {
+        @include retro-button;
+      }
+    }
+  }
+
+  &-error {
+    @include glassmorphism(rgba(0, 0, 0, 0.7), rgba(255, 0, 0, 0.2));
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid $retro-red;
+
+    p {
+      font-family: "VT323", monospace;
+      color: $retro-red;
+      margin: 0;
+      padding-left: 1rem;
+      position: relative;
+
+      &::before {
+        content: "! ";
+        color: $retro-yellow;
+      }
+    }
+  }
+
+  &-footer {
+    text-align: center;
+    padding: 2rem 0;
+
+    p {
+      font-family: "VT323", monospace;
+      color: $retro-text;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+  }
+}
+
+@keyframes gridMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 50px;
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+}
+
+// Media queries for responsive design
+@media (max-width: 768px) {
+  .auction {
+    &-header {
+      h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    &-content {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .auction {
+    &-header {
+      h1 {
+        font-size: 2rem;
+
+        &::before,
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    &-form {
+      padding: 1.5rem;
+    }
+  }
+}

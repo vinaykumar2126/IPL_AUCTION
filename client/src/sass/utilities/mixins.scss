@@ -1,0 +1,347 @@
+// Basic theme (keeping original for compatibility)
+@mixin theme {
+  background-color: $retro-dark;
+  color: $retro-text;
+}
+
+// Enhanced glassmorphism with customizable parameters
+@mixin glassmorphism(
+  $bg: $glass-bg,
+  $border: $glass-border,
+  $shadow: $glass-shadow
+) {
+  position: relative;
+  background-color: $bg;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid $border;
+  border-radius: 10px;
+  box-shadow: $shadow;
+  overflow: hidden;
+  z-index: 1;
+}
+
+// Neon text effect
+@mixin neon-text($color: $retro-cyan, $glow-color: $retro-pink, $intensity: 1) {
+  color: $color;
+  text-shadow: 0 0 5px rgba($color, $intensity * 0.5),
+    0 0 10px rgba($glow-color, $intensity * 0.3),
+    0 0 15px rgba($glow-color, $intensity * 0.1);
+}
+
+// Neon border effect
+@mixin neon-border($color: $retro-cyan, $glow-color: $retro-pink, $width: 1px) {
+  border: $width solid $color;
+  box-shadow: 0 0 5px rgba($color, 0.5), 0 0 10px rgba($glow-color, 0.3),
+    inset 0 0 5px rgba($color, 0.2);
+}
+
+// Retro grid background
+@mixin retro-grid($color: $retro-cyan, $opacity: 0.3) {
+  background-image: linear-gradient(
+      0deg,
+      transparent 24%,
+      rgba($color, $opacity) 25%,
+      rgba($color, $opacity) 26%,
+      transparent 27%,
+      transparent 74%,
+      rgba($color, $opacity) 75%,
+      rgba($color, $opacity) 76%,
+      transparent 77%,
+      transparent
+    ),
+    linear-gradient(
+      90deg,
+      transparent 24%,
+      rgba($color, $opacity) 25%,
+      rgba($color, $opacity) 26%,
+      transparent 27%,
+      transparent 74%,
+      rgba($color, $opacity) 75%,
+      rgba($color, $opacity) 76%,
+      transparent 77%,
+      transparent
+    );
+  background-size: 50px 50px;
+}
+
+// VHS scan line effect
+@mixin vhs-effect($opacity: 0.3) {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.1) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 10;
+    opacity: $opacity;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 0, 255, 0.1),
+      rgba(0, 255, 255, 0.1),
+      rgba(255, 0, 255, 0.1)
+    );
+    background-size: 200% 100%;
+    pointer-events: none;
+    z-index: 11;
+    mix-blend-mode: overlay;
+    opacity: $opacity;
+    animation: vhs-tracking 15s linear infinite;
+  }
+}
+
+// Chrome/metallic text effect
+@mixin chrome-text {
+  color: transparent;
+  background: linear-gradient(
+    to bottom,
+    #eee 0%,
+    #999 45%,
+    #888 50%,
+    #ccc 55%,
+    #fff 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5), 4px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+// CRT screen effect
+@mixin crt-screen {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+    pointer-events: none;
+    z-index: 9;
+    mix-blend-mode: multiply;
+  }
+}
+
+// Glitch text effect
+@mixin glitch-text {
+  position: relative;
+  animation: glitch 2s infinite;
+
+  &::before,
+  &::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  &::before {
+    color: $retro-cyan;
+    animation: glitch-top 2s infinite linear alternate-reverse;
+  }
+
+  &::after {
+    color: $retro-pink;
+    animation: glitch-bottom 3s infinite linear alternate-reverse;
+  }
+}
+
+// Retro button style
+@mixin retro-button {
+  position: relative;
+  display: inline-block;
+  padding: 0.75em 1.5em;
+  background-color: transparent;
+  color: $retro-cyan;
+  font-family: $font-family-retro;
+  font-size: 0.85rem;
+  border: 2px solid $retro-cyan;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all $transition-speed ease;
+  box-shadow: 0 0 8px rgba($retro-cyan, 0.5);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba($retro-cyan, 0.2) 50%,
+      transparent 100%
+    );
+    transition: all $transition-speed ease;
+  }
+
+  &:hover {
+    background-color: $retro-cyan;
+    color: $retro-dark;
+    box-shadow: 0 0 10px rgba($retro-cyan, 0.7), 0 0 20px rgba($retro-cyan, 0.3);
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 0 5px rgba($retro-cyan, 0.7), 0 0 10px rgba($retro-cyan, 0.3);
+  }
+}
+
+// Keyframe animations for the mixins
+
+@keyframes vhs-tracking {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
+}
+
+@keyframes glitch {
+  0% {
+    transform: skew(0deg);
+  }
+  20% {
+    transform: skew(0deg);
+  }
+  21% {
+    transform: skew(2deg);
+  }
+  23% {
+    transform: skew(0deg);
+  }
+  40% {
+    transform: skew(0deg);
+  }
+  41% {
+    transform: skew(-2deg);
+  }
+  42% {
+    transform: skew(0deg);
+  }
+  100% {
+    transform: skew(0deg);
+  }
+}
+
+@keyframes glitch-top {
+  0% {
+    clip: rect(20px, 9999px, 24px, 0);
+  }
+  10% {
+    clip: rect(63px, 9999px, 72px, 0);
+  }
+  20% {
+    clip: rect(17px, 9999px, 98px, 0);
+  }
+  30% {
+    clip: rect(11px, 9999px, 33px, 0);
+  }
+  40% {
+    clip: rect(41px, 9999px, 21px, 0);
+  }
+  50% {
+    clip: rect(40px, 9999px, 23px, 0);
+  }
+  60% {
+    clip: rect(3px, 9999px, 23px, 0);
+  }
+  70% {
+    clip: rect(37px, 9999px, 92px, 0);
+  }
+  80% {
+    clip: rect(66px, 9999px, 93px, 0);
+  }
+  90% {
+    clip: rect(3px, 9999px, 72px, 0);
+  }
+  100% {
+    clip: rect(40px, 9999px, 42px, 0);
+  }
+}
+
+@keyframes glitch-bottom {
+  0% {
+    clip: rect(69px, 9999px, 40px, 0);
+  }
+  10% {
+    clip: rect(26px, 9999px, 4px, 0);
+  }
+  20% {
+    clip: rect(7px, 9999px, 24px, 0);
+  }
+  30% {
+    clip: rect(76px, 9999px, 92px, 0);
+  }
+  40% {
+    clip: rect(20px, 9999px, 59px, 0);
+  }
+  50% {
+    clip: rect(85px, 9999px, 97px, 0);
+  }
+  60% {
+    clip: rect(19px, 9999px, 9px, 0);
+  }
+  70% {
+    clip: rect(82px, 9999px, 96px, 0);
+  }
+  80% {
+    clip: rect(3px, 9999px, 90px, 0);
+  }
+  90% {
+    clip: rect(29px, 9999px, 12px, 0);
+  }
+  100% {
+    clip: rect(58px, 9999px, 7px, 0);
+  }
+}
